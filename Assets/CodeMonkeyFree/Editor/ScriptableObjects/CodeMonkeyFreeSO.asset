@@ -14,39 +14,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentVersion: 1.01
   subtype: kitchenchaos
-  lastShownTimestamp: 1754301268
+  lastShownTimestamp: 1754540204
   lastUpdateResponse:
-    version: 1.00
+    version: 1.01
     versionUrl: https://unitycodemonkey.com
-  checkedLastUpdateTimestamp: 1754301268
+  checkedLastUpdateTimestamp: 1754540204
   lastQOTDResponse:
-    questionId: 163
-    questionText: What is the purpose of Unity Hub?
-    answerA: Provide a space for the community to interact
-    answerB: Manage different Unity versions and Projects
-    answerC: Dashboard for Unity services
-    answerD: 
+    questionId: 208
+    questionText: Which namespace do we need to use File.WriteAllText()?
+    answerA: using System;
+    answerB: using UnityEngine;
+    answerC: using System.IO;
+    answerD: using UnityEngine.UI;
     answerE: 
-  lastQotdTimestamp: 1754301268
+  lastQotdTimestamp: 1754540204
   lastDynamicHeaderResponse:
-    topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/humbleBundleSyntyMar25.png
-    topText: Make ANY game with these awesome Assets! (96% OFF ENDS SOON!)
-    topLink: humblebundle
-    bottomText: Learn Unity DOTS for MASSIVE Performance Boosts! (and make an RTS)
-    bottomLink: dotscourse
-  lastDynamicHeaderTimestamp: 1754301268
+    topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/summer2025CodeMonkeyBundle.png
+    topText: All my Courses (and Games) in one Bundle! DEEP DISCOUNT ONLY THIS SUMMER!
+    topLink: summer2025bundle
+    bottomText: Get my Code Monkey Toolkit and make games BETTER and FASTER! 50%
+      OFF right now!
+    bottomLink: toolkit
+  lastDynamicHeaderTimestamp: 1754540204
   websiteLatestMessage:
     text: <a href="https://cmonkey.co/freecourses">Check out all my FREE courses!
       Click here!</a>
-  websiteLatestMessageTimestamp: 1754301268
+  websiteLatestMessageTimestamp: 1754540204
   websiteLatestVideos:
     videos:
-    - youTubeId: ZIg7VoD9ptI
-      title: The FUTURE of Unity in 2025 and BEYOND!
-    - youTubeId: W_XOZAWJF24
-      title: I made the MOST PROFITABLE Game as a Test!
-    - youTubeId: J0KMvH-yFmA
-      title: TOP 10 NEW Games, Made with Unity! (FEBRUARY 2025)
-    - youTubeId: DOSLOa7cnoE
-      title: I SHOULD have done this a long time ago, and YOU too!
-  websiteLatestVideosTimestamp: 1754301268
+    - youTubeId: y-w3vnh_f4Q
+      title: Are Old Tutorials OBSOLETE?
+    - youTubeId: DaKW4kqFlao
+      title: How to LEARN new Skills on HARD MODE!
+    - youTubeId: ubBS7vTQlVo
+      title: Cooking is HARDER than Programming!
+    - youTubeId: kWRCB-R2Yrg
+      title: TOP 20 Visual Assets to INSPIRE YOU! (JULY 2025)
+  websiteLatestVideosTimestamp: 1754540204
