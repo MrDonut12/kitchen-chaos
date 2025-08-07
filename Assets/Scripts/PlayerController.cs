@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
+    [SerializeField] private bool isWalking;
     [SerializeField] private float move_speed = 5.4f;
     [SerializeField] private float rotate_speed = 10.4f;
     private void Update()
@@ -35,8 +35,12 @@ public class PlayerController : MonoBehaviour
         InputVector = InputVector.normalized;
         transform.position += InputVector * Time.deltaTime * move_speed;
         // transform.forward = InputVector;
+        isWalking = (InputVector != Vector3.zero);
+        
         transform.forward = Vector3.Lerp(transform.forward, (InputVector), Time.deltaTime * rotate_speed);
         Debug.Log(InputVector);
 
     }
+
+    public bool IsWalking() { return isWalking; }
 }
