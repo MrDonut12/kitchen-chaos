@@ -13,23 +13,23 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            InputVector.z = -1;
+            InputVector.z = 1;
         }
 
         if (Input.GetKey(KeyCode.A))
         {
 
-            InputVector.x = +1;
+            InputVector.x = -1;
         }
 
         if (Input.GetKey(KeyCode.S))
         {
-            InputVector.z = +1;
+            InputVector.z = -1;
         }
         
         if (Input.GetKey(KeyCode.D))
         {
-            InputVector.x = -1;
+            InputVector.x = 1;
         }
 
         InputVector = InputVector.normalized;
