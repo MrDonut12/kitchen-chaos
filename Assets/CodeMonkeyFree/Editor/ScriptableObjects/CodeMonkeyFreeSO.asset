@@ -14,20 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentVersion: 1.01
   subtype: kitchenchaos
-  lastShownTimestamp: 1754540204
+  lastShownTimestamp: 1754645240
   lastUpdateResponse:
     version: 1.01
     versionUrl: https://unitycodemonkey.com
-  checkedLastUpdateTimestamp: 1754540204
+  checkedLastUpdateTimestamp: 1754645240
   lastQOTDResponse:
-    questionId: 208
-    questionText: Which namespace do we need to use File.WriteAllText()?
-    answerA: using System;
-    answerB: using UnityEngine;
-    answerC: using System.IO;
-    answerD: using UnityEngine.UI;
+    questionId: 209
+    questionText: Can Color ever be null?
+    answerA: Yes, always
+    answerB: No
+    answerC: Yes, as Nullable
+    answerD: 
     answerE: 
-  lastQotdTimestamp: 1754540204
+  lastQotdTimestamp: 1754645240
   lastDynamicHeaderResponse:
     topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/summer2025CodeMonkeyBundle.png
     topText: All my Courses (and Games) in one Bundle! DEEP DISCOUNT ONLY THIS SUMMER!
@@ -35,11 +35,11 @@ MonoBehaviour:
     bottomText: Get my Code Monkey Toolkit and make games BETTER and FASTER! 50%
       OFF right now!
     bottomLink: toolkit
-  lastDynamicHeaderTimestamp: 1754540204
+  lastDynamicHeaderTimestamp: 1754645240
   websiteLatestMessage:
     text: <a href="https://cmonkey.co/freecourses">Check out all my FREE courses!
       Click here!</a>
-  websiteLatestMessageTimestamp: 1754540204
+  websiteLatestMessageTimestamp: 1754645240
   websiteLatestVideos:
     videos:
     - youTubeId: y-w3vnh_f4Q
@@ -50,4 +50,4 @@ MonoBehaviour:
       title: Cooking is HARDER than Programming!
     - youTubeId: kWRCB-R2Yrg
       title: TOP 20 Visual Assets to INSPIRE YOU! (JULY 2025)
-  websiteLatestVideosTimestamp: 1754540204
+  websiteLatestVideosTimestamp: 1754645240
