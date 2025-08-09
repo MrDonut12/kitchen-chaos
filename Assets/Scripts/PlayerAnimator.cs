@@ -12,6 +12,6 @@ public class PlayerAnimator : MonoBehaviour
     }
     private void Update()
     {
-        animator.SetBool(IS_WALKING, Player.IsWalking());
+        animator.SetBool(IS_WALKING, Player.IsWalking());   
     }
 }
