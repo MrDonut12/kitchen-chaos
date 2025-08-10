@@ -27,7 +27,7 @@
 
 ### Installation:
 ```bash
-git clone https://github.com/your-username/kitchen-chaos.git
+git clone https://github.com/MrDonut12/kitchen-chaos.git
 ```
 1. Open the project in Unity Hub.
 2. Load the `GameScene.unity` from `/Assets/Scenes/`.
