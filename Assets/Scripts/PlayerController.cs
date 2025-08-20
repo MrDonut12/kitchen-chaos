@@ -27,11 +27,28 @@ public class PlayerController : MonoBehaviour
     private Vector3 InputVector;
     private Vector3 lastInputVector; // Used for handle_interaction
 
+    private InputSystem_Actions PlayerInputAction;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+
+        gameInput.OneInteractionEvent += AInteract_performed;
+
     }
+
+    private void AInteract_performed(object sender, EventArgs e)
+    {
+        if (Physics.Raycast(transform.position, lastInputVector, out RaycastHit hitInfo, detectLength))
+        {
+            if (hitInfo.transform.TryGetComponent<ClearCounter>(out ClearCounter cc))
+            {
+                cc.Interact();
+            }
+        }
+    }
+
     private void Update()
     {
         isJump = gameInput.IsJumpPressed();
@@ -46,11 +63,12 @@ public class PlayerController : MonoBehaviour
 
 
     }
-
+    
     private void FixedUpdate()
     {
         HandleMove();
         HandleInteraction();
+        
     }
 
     
@@ -80,10 +98,9 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(transform.position, lastInputVector, out RaycastHit hitInfo, detectLength))
         {
             if(hitInfo.transform.TryGetComponent<ClearCounter> (out ClearCounter cc)) {
-                cc.Interact();
+         //       cc.Interact();
             }
         }
-        else Debug.Log("no object detection");
     }
     public bool IsWalking() { return isWalking; }
     public bool IsJump() { return isJump; }
