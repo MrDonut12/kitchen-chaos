@@ -1,93 +1,118 @@
 using System;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private bool isWalking;
-    [SerializeField] private bool isJump;
-
-    [SerializeField] private float move_speed = 5.4f;
-    [SerializeField] private float rotate_speed = 24f;
+    [Header("Movement Settings")]
+    [SerializeField] private float moveSpeed = 5.4f;
+    [SerializeField] private float rotateSpeed = 24f;
     [SerializeField] private float jumpForce = 3f;
+
+    [Header("Collision Settings")]
+    [SerializeField] private float playerRadius = 0.7f;
+    [SerializeField] private float playerHeight = 2.25f;
+    [SerializeField] private float groundCheckDistance = 0.3f;
+    [SerializeField] private float interactDistance = 1f;
+
+    private bool isWalking;
+    private bool isJump;
     private bool canMove;
 
-    [SerializeField] private GameInput gameInput;
     private Rigidbody rb;
+    private Vector3 inputVector;
+    private Vector3 lastInputVector; 
 
-    private float playerRadius = 0.7f;
-    private float playerHeight = 2f;
-    private float castDistance;
-
-    private Vector3 InputVector;
+    [SerializeField] private GameInput gameInput;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+
+
+        gameInput.OneInteractionEvent += OnInteractPerformed;
     }
+
     private void Update()
     {
-        isJump = gameInput.IsJumpPressed();
-        InputVector = gameInput.getNormalizedVector();
-        isWalking = (InputVector != Vector3.zero);
 
-        castDistance = Time.deltaTime * move_speed;
+        isJump = gameInput.IsJumpPressed();
+        inputVector = gameInput.getNormalizedVector();
+        isWalking = inputVector != Vector3.zero;
+
+        if (isWalking)
+            lastInputVector = inputVector;
+
+        float castDistance = Time.deltaTime * moveSpeed;
         Vector3 point1 = transform.position;
         Vector3 point2 = transform.position + Vector3.up * playerHeight;
-        canMove = !Physics.CapsuleCast(point1, point2, playerRadius, InputVector, castDistance);
+        canMove = !Physics.CapsuleCast(point1, point2, playerRadius, inputVector, castDistance);
     }
 
     private void FixedUpdate()
     {
-        if (canMove)
-            rb.MovePosition(rb.position + InputVector * Time.fixedDeltaTime * move_speed);
+        HandleMove();
+    }
 
-        if (isWalking) 
-            transform.forward = Vector3.Lerp(transform.forward, (InputVector), Time.fixedDeltaTime * rotate_speed);
+    private void HandleMove()
+    {
+        if (canMove)
+            rb.MovePosition(rb.position + inputVector * Time.fixedDeltaTime * moveSpeed);
+
+        if (isWalking)
+            transform.forward = Vector3.Lerp(transform.forward, inputVector, Time.fixedDeltaTime * rotateSpeed);
 
         if (isJump && IsGrounded())
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
-
-
-        // Debug line
-
-        Debug.DrawRay(transform.position, Vector3.down * .3f, Color.red);
-        if (IsGrounded())
-            Debug.Log("IS GROUNDED");
-
+        Debug.DrawRay(transform.position, Vector3.down * groundCheckDistance, Color.red);
+        Debug.DrawRay(transform.position, lastInputVector * interactDistance, Color.green);
     }
 
+ 
+    private void OnInteractPerformed(object sender, EventArgs e)
+    {
+        TryInteract();
+    }
+
+    private void TryInteract()
+    {
+        if (Physics.Raycast(transform.position, lastInputVector, out RaycastHit hit, interactDistance))
+        {
+            if (hit.transform.TryGetComponent(out ClearCounter cc))
+            {
+                cc.Interact();
+            }
+        }
+    }
+
+    private bool IsGrounded()
+    {
+        return Physics.Raycast(transform.position, Vector3.down, groundCheckDistance);
+    }
     public bool IsWalking() { return isWalking; }
     public bool IsJump() { return isJump; }
-    private bool IsGrounded() { return Physics.Raycast(transform.position, Vector3.down, .3f); }
-
+    // Debug Gizmos
     private void OnDrawGizmos()
     {
         if (!Application.isPlaying) return;
 
+        Gizmos.color = Color.yellow;
         Vector3 point1 = transform.position;
         Vector3 point2 = transform.position + Vector3.up * playerHeight;
-        Vector3 dir = InputVector.normalized * castDistance;
+        Vector3 dir = inputVector.normalized * (Time.deltaTime * moveSpeed);
 
-        Gizmos.color = Color.yellow;
         DrawCapsule(point1, point2, playerRadius, dir);
     }
 
     private void DrawCapsule(Vector3 point1, Vector3 point2, float radius, Vector3 offset)
     {
-        
         Gizmos.DrawWireSphere(point1, radius);
         Gizmos.DrawWireSphere(point2, radius);
 
-        
         Gizmos.DrawWireSphere(point1 + offset, radius);
         Gizmos.DrawWireSphere(point2 + offset, radius);
 
-        
         Gizmos.DrawLine(point1, point1 + offset);
         Gizmos.DrawLine(point2, point2 + offset);
     }
