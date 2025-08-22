@@ -22,8 +22,14 @@ public class PlayerController : MonoBehaviour
     private Vector3 inputVector;
     private Vector3 lastInputVector;
 
-    [SerializeField] private ClearCounter selectedCounter;
+    public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
+    public class OnSelectedCounterChangedEventArgs : System.EventArgs
+    {
+        public ClearCounter selectedCounter;
+    }
 
+    [Header("Other")]
+    [SerializeField] private ClearCounter selectedCounter;
     [SerializeField] private GameInput gameInput;
 
     private void Start()
