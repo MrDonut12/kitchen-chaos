@@ -71,14 +71,15 @@ public class PlayerController : MonoBehaviour
             {
                 if (cc != selectedCounter)
                 {
-                    selectedCounter = cc;
+                    SetSelectedCounter(selectedCounter);
                 }
-            } 
+            }
             else
-                selectedCounter = null;
-            
-        } else 
-            selectedCounter = null; 
+                SetSelectedCounter(null);
+
+        }
+        else
+            SetSelectedCounter(null);
     }
     private void HandleMove()
     {
@@ -113,6 +114,17 @@ public class PlayerController : MonoBehaviour
     }
     public bool IsWalking() { return isWalking; }
     public bool IsJump() { return isJump; }
+    
+    private void SetSelectedCounter (ClearCounter clearCounter)
+    {
+        this.selectedCounter = selectedCounter;
+        OnSelectedCounterChanged(this, new OnSelectedCounterChangedEventArgs
+        {
+            selectedCounter = selectedCounter
+        });
+    }
+    
+    
     // Debug Gizmos
     private void OnDrawGizmos()
     {
