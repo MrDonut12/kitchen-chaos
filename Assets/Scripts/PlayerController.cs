@@ -97,13 +97,8 @@ public class PlayerController : MonoBehaviour
 
     private void TryInteract()
     {
-        if (Physics.Raycast(transform.position, lastInputVector, out RaycastHit hit, interactDistance))
-        {
-            if (hit.transform.TryGetComponent(out ClearCounter cc))
-            {
-                cc.Pickup();
-            }
-        }
+        if (selectedCounter != null)
+            selectedCounter.Interact();
     }
 
     private bool IsGrounded()
