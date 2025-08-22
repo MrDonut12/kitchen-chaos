@@ -8,15 +8,13 @@ public class ClearCounter : MonoBehaviour
     [SerializeField] private bool isInteract;
     private void Awake()
     {
-        SelectedBox = transform.Find("SelectedBox");
-        KitchenBox = SelectedBox.Find("KitchenCounter");
+ 
     }
 
 
     public void Interact()
     {
         isInteract = true;
-        KitchenBox.GetComponent<MeshRenderer>().enabled = isInteract;
     }
 
 

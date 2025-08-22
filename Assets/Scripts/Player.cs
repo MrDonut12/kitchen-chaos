@@ -20,8 +20,16 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
     private Vector3 inputVector;
-    private Vector3 lastInputVector; 
+    private Vector3 lastInputVector;
 
+    public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
+    public class OnSelectedCounterChangedEventArgs : System.EventArgs
+    {
+        public ClearCounter selectedCounter;
+    }
+
+    [Header("Other")]
+    [SerializeField] private ClearCounter selectedCounter;
     [SerializeField] private GameInput gameInput;
 
     private void Start()
@@ -52,8 +60,27 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         HandleMove();
+        HandleInteract();
     }
 
+    private void HandleInteract()
+    {
+        if (Physics.Raycast(transform.position, lastInputVector, out RaycastHit hit, interactDistance))
+        {
+            if (hit.transform.TryGetComponent(out ClearCounter cc))
+            {
+                if (cc != selectedCounter)
+                {
+                    SetSelectedCounter(cc);
+                }
+            }
+            else
+                SetSelectedCounter(null);
+
+        }
+        else
+            SetSelectedCounter(null);
+    }
     private void HandleMove()
     {
         if (canMove)
@@ -77,13 +104,8 @@ public class PlayerController : MonoBehaviour
 
     private void TryInteract()
     {
-        if (Physics.Raycast(transform.position, lastInputVector, out RaycastHit hit, interactDistance))
-        {
-            if (hit.transform.TryGetComponent(out ClearCounter cc))
-            {
-                cc.Interact();
-            }
-        }
+        if (selectedCounter != null)
+            selectedCounter.Interact();
     }
 
     private bool IsGrounded()
@@ -92,6 +114,17 @@ public class PlayerController : MonoBehaviour
     }
     public bool IsWalking() { return isWalking; }
     public bool IsJump() { return isJump; }
+    
+    private void SetSelectedCounter (ClearCounter clearCounter)
+    {
+        this.selectedCounter = clearCounter;
+        OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs
+        {
+            selectedCounter = selectedCounter
+        });
+    }
+    
+    
     // Debug Gizmos
     private void OnDrawGizmos()
     {
