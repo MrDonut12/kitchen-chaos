@@ -15,4 +15,4 @@
 - 🛠 6 Unique Kitchen Counters for preparing food
 - 🔥 Time management and multitasking gameplay
 
-> ⚠️ This project is designed for educational purposes, focusing on clean code practices and scalable game architecture
+> ⚠️ This project is designed for educational purposes, focusing on clean code practices and scalable game architecture.
