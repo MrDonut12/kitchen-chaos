@@ -20,7 +20,9 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
     private Vector3 inputVector;
-    private Vector3 lastInputVector; 
+    private Vector3 lastInputVector;
+
+    [SerializeField] private ClearCounter selectedCounter;
 
     [SerializeField] private GameInput gameInput;
 
@@ -52,8 +54,26 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         HandleMove();
+        HandleInteract();
     }
 
+    private void HandleInteract()
+    {
+        if (Physics.Raycast(transform.position, lastInputVector, out RaycastHit hit, interactDistance))
+        {
+            if (hit.transform.TryGetComponent(out ClearCounter cc))
+            {
+                if (cc != selectedCounter)
+                {
+                    selectedCounter = cc;
+                }
+            } 
+            else
+                selectedCounter = null;
+            
+        } else 
+            selectedCounter = null; 
+    }
     private void HandleMove()
     {
         if (canMove)
@@ -81,7 +101,7 @@ public class PlayerController : MonoBehaviour
         {
             if (hit.transform.TryGetComponent(out ClearCounter cc))
             {
-                cc.Interact();
+                cc.Pickup();
             }
         }
     }

@@ -1076,11 +1076,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65adc27aa39b2bc4283f56693b7b7f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isWalking: 0
-  isJump: 0
-  move_speed: 5.4
-  rotate_speed: 24
+  moveSpeed: 5.4
+  rotateSpeed: 24
   jumpForce: 3
+  playerRadius: 0.7
+  playerHeight: 2.25
+  groundCheckDistance: 0.3
+  interactDistance: 1
   gameInput: {fileID: 1347712511}
 --- !u!136 &1912110708
 CapsuleCollider:
@@ -1156,6 +1158,10 @@ PrefabInstance:
     - target: {fileID: 7479431955685360395, guid: a58390a6182679d4fb72e71dbff7d53f, type: 3}
       propertyPath: m_Name
       value: ClearCounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 7950499378338750369, guid: a58390a6182679d4fb72e71dbff7d53f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
