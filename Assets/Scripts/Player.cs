@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (cc != selectedCounter)
                 {
-                    SetSelectedCounter(selectedCounter);
+                    SetSelectedCounter(cc);
                 }
             }
             else
@@ -117,8 +117,8 @@ public class PlayerController : MonoBehaviour
     
     private void SetSelectedCounter (ClearCounter clearCounter)
     {
-        this.selectedCounter = selectedCounter;
-        OnSelectedCounterChanged(this, new OnSelectedCounterChangedEventArgs
+        this.selectedCounter = clearCounter;
+        OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs
         {
             selectedCounter = selectedCounter
         });
