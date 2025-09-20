@@ -76,10 +76,11 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     //cannot move in any direction
-                    
-                }
-    }
 
+                }
+            }
+        }
+    }
     private void FixedUpdate()
     {
         HandleMove();
