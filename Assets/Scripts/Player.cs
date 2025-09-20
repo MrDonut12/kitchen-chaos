@@ -55,6 +55,29 @@ public class PlayerController : MonoBehaviour
         Vector3 point1 = transform.position;
         Vector3 point2 = transform.position + Vector3.up * playerHeight;
         canMove = !Physics.CapsuleCast(point1, point2, playerRadius, inputVector, castDistance);
+        if (!canMove)
+        {
+            //attemp only X movement
+            Vector3 moveDirX = new Vector3(inputVector.x, 0, 0).normalized;
+            canMove = moveDirX != Vector3.zero && !Physics.CapsuleCast(point1, point2, playerRadius, moveDirX, castDistance);
+            if (canMove)
+            {
+                inputVector = moveDirX;
+            }
+            else
+            {
+                //attemp only Z movement
+                Vector3 moveDirZ = new Vector3(0, 0, inputVector.z).normalized;
+                canMove = moveDirZ != Vector3.zero && !Physics.CapsuleCast(point1, point2, playerRadius, moveDirZ, castDistance);
+                if (canMove)
+                {
+                    inputVector = moveDirZ;
+                }
+                else
+                {
+                    //cannot move in any direction
+                    
+                }
     }
 
     private void FixedUpdate()
