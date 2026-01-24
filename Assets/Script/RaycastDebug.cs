@@ -13,13 +13,14 @@ public class RaycastDebug : MonoBehaviour
 
     void Start() {
         origin = transform.position;
-
     }
 
     void Update() {
         origin = transform.position;
         dir = player.getDir();
         canMove = !Physics.Raycast(origin, dir.normalized, out hit, MaxDistance);
+        Debug.Log(hit.transform);
+        Debug.Log(hit.collider);
         DrawGizmos();
     }
 
