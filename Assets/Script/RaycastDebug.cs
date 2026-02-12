@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class RaycastDebug : MonoBehaviour
 {
-    private const float MaxDistance = .2f;
+    private const float MaxDistance = 1f;
     [SerializeField] private bool canMove = true;
     [SerializeField] private Player player;
 

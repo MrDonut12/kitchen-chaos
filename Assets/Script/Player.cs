@@ -2,20 +2,20 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float rotationSpeed = 5f;
+    [SerializeField] private float moveSpeed = 10f;
+    [SerializeField] private float rotationSpeed = 100f;
     [SerializeField] private RaycastDebug raycastDebug;
 
     private Vector3 currDir;
 
-    void Update()
+    private void Update()
     {
         currDir = Vector3.zero;
 
-        if (Input.GetKey(KeyCode.W)) currDir += Vector3.forward;
-        if (Input.GetKey(KeyCode.S)) currDir += Vector3.back;
-        if (Input.GetKey(KeyCode.A)) currDir += Vector3.left;
-        if (Input.GetKey(KeyCode.D)) currDir += Vector3.right;
+        if (Input.GetKey(KeyCode.W)) currDir += Vector3.back;
+        if (Input.GetKey(KeyCode.S)) currDir += Vector3.forward;
+        if (Input.GetKey(KeyCode.A)) currDir += Vector3.right;
+        if (Input.GetKey(KeyCode.D)) currDir += Vector3.left;
 
         currDir.Normalize();
         // Debug.Log(raycastDebug.CanMove(currDir));
@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.Lerp(
                 transform.rotation,
                 targetRotation,
-                rotationSpeed * Time.deltaTime
+                 rotationSpeed * Time.deltaTime
             );
         }
     }
